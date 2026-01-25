@@ -127,10 +127,10 @@ function NavItem({ item, level = 0 }) {
   }
 
   return (
-    <SidebarMenuButton asChild className={`hover:bg-primary/10 rounded-lg transition-all ${isActive ? 'bg-primary text-primary-foreground' : ''}`}>
-      <Link to={item.url} className="flex items-center gap-3 px-3 py-2">
-        <item.icon className="w-4 h-4" />
-        <span className="text-sm">{item.title}</span>
+    <SidebarMenuButton asChild className={`hover:bg-primary/10 rounded-lg transition-all min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${isActive ? 'bg-primary text-primary-foreground' : ''}`}>
+      <Link to={item.url} className="flex items-center gap-3 px-3 py-3">
+        <item.icon className="w-5 h-5" />
+        <span className="text-sm font-medium">{item.title}</span>
       </Link>
     </SidebarMenuButton>
   );
@@ -155,6 +155,13 @@ export default function Layout({ children, currentPageName }) {
 
   return (
     <SidebarProvider>
+      {/* Skip link para acessibilidade */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:outline-none"
+      >
+        Pular para conteúdo principal
+      </a>
       <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 to-gray-50">
         <Sidebar className="border-r border-border bg-white shadow-lg">
           <SidebarHeader className="border-b border-green-800/20 p-6 bg-sidebar">
@@ -187,8 +194,8 @@ export default function Layout({ children, currentPageName }) {
                         location.pathname === createPageUrl("Home") ? 'bg-primary text-primary-foreground' : ''
                       }`}
                     >
-                      <Link to={createPageUrl("Home")} className="flex items-center gap-3 px-3 py-2">
-                        <BookOpen className="w-4 h-4" />
+                      <Link to={createPageUrl("Home")} className="flex items-center gap-3 px-3 py-3 min-h-[44px]">
+                        <BookOpen className="w-5 h-5" />
                         <span className="font-medium">Início</span>
                       </Link>
                     </SidebarMenuButton>
@@ -196,11 +203,15 @@ export default function Layout({ children, currentPageName }) {
                   <SidebarMenuItem>
                     <button
                       onClick={() => setSearchOpen(true)}
-                      className="w-full flex items-center gap-3 px-3 py-2 hover:bg-primary/10 rounded-lg transition-all text-left"
+                      aria-label="Abrir busca global"
+                      aria-expanded={searchOpen}
+                      aria-controls="global-search-dialog"
+                      aria-keyshortcuts="Meta+K"
+                      className="w-full flex items-center gap-3 px-3 py-3 min-h-[44px] hover:bg-primary/10 rounded-lg transition-all text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                     >
-                      <Search className="w-4 h-4" />
+                      <Search className="w-5 h-5" aria-hidden="true" />
                       <span className="font-medium">Buscar</span>
-                      <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-primary/30 bg-primary/10 px-1.5 font-mono text-[10px] font-medium text-primary">
+                      <kbd aria-hidden="true" className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-primary/30 bg-primary/10 px-1.5 font-mono text-[10px] font-medium text-primary">
                         <span className="text-xs">⌘</span>K
                       </kbd>
                     </button>
@@ -239,11 +250,14 @@ export default function Layout({ children, currentPageName }) {
               <Button
                 variant="outline"
                 onClick={() => setSearchOpen(true)}
+                aria-label="Abrir busca global"
+                aria-expanded={searchOpen}
+                aria-keyshortcuts="Meta+K"
                 className="hidden md:flex items-center gap-2 min-w-[300px] justify-start text-muted-foreground hover:text-foreground border-border hover:border-primary hover:bg-primary/5"
               >
-                <Search className="w-4 h-4" />
+                <Search className="w-4 h-4" aria-hidden="true" />
                 <span>Buscar no manual...</span>
-                <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-primary/30 bg-primary/10 px-1.5 font-mono text-[10px] font-medium text-primary">
+                <kbd aria-hidden="true" className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-primary/30 bg-primary/10 px-1.5 font-mono text-[10px] font-medium text-primary">
                   <span className="text-xs">⌘</span>K
                 </kbd>
               </Button>
@@ -252,14 +266,15 @@ export default function Layout({ children, currentPageName }) {
                 variant="outline"
                 size="icon"
                 onClick={() => setSearchOpen(true)}
+                aria-label="Abrir busca"
                 className="md:hidden border-border hover:border-primary hover:bg-primary/5"
               >
-                <Search className="w-4 h-4" />
+                <Search className="w-4 h-4" aria-hidden="true" />
               </Button>
             </div>
           </header>
 
-          <div className="flex-1 overflow-auto">
+          <div id="main-content" className="flex-1 overflow-auto" tabIndex="-1">
             {children}
           </div>
         </main>
