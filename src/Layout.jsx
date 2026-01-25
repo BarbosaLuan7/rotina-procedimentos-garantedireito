@@ -155,8 +155,8 @@ export default function Layout({ children, currentPageName }) {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-gradient-to-br from-green-50 to-emerald-50">
-        <Sidebar className="border-r border-green-200 bg-white shadow-lg">
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 to-gray-50">
+        <Sidebar className="border-r border-border bg-white shadow-lg">
           <SidebarHeader className="border-b border-green-800/20 p-6 bg-sidebar">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
@@ -229,7 +229,7 @@ export default function Layout({ children, currentPageName }) {
         </Sidebar>
 
         <main className="flex-1 flex flex-col">
-          <header className="bg-white/80 backdrop-blur-sm border-b border-green-200 px-6 py-4 sticky top-0 z-10 shadow-sm">
+          <header className="bg-white/80 backdrop-blur-sm border-b border-border px-6 py-4 sticky top-0 z-10 shadow-sm">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-4">
                 <SidebarTrigger className="md:hidden hover:bg-primary/10 p-2 rounded-lg transition-all" />
@@ -239,7 +239,7 @@ export default function Layout({ children, currentPageName }) {
               <Button
                 variant="outline"
                 onClick={() => setSearchOpen(true)}
-                className="hidden md:flex items-center gap-2 min-w-[300px] justify-start text-muted-foreground hover:text-foreground border-green-300 hover:border-primary hover:bg-primary/5"
+                className="hidden md:flex items-center gap-2 min-w-[300px] justify-start text-muted-foreground hover:text-foreground border-border hover:border-primary hover:bg-primary/5"
               >
                 <Search className="w-4 h-4" />
                 <span>Buscar no manual...</span>
@@ -252,7 +252,7 @@ export default function Layout({ children, currentPageName }) {
                 variant="outline"
                 size="icon"
                 onClick={() => setSearchOpen(true)}
-                className="md:hidden border-green-300 hover:border-primary hover:bg-primary/5"
+                className="md:hidden border-border hover:border-primary hover:bg-primary/5"
               >
                 <Search className="w-4 h-4" />
               </Button>
