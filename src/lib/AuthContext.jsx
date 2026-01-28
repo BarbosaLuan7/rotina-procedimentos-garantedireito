@@ -14,6 +14,13 @@ export const AuthProvider = ({ children }) => {
   const [appPublicSettings, setAppPublicSettings] = useState(null); // Contains only { id, public_settings }
 
   useEffect(() => {
+    // Se não há configuração de backend, permitir acesso direto (modo estático)
+    if (!appParams.serverUrl || !appParams.appId) {
+      setIsLoadingPublicSettings(false);
+      setIsLoadingAuth(false);
+      setIsAuthenticated(true);
+      return;
+    }
     checkAppState();
   }, []);
 
